@@ -229,7 +229,7 @@ function Comando_Control_Voz_Callback(hObject, eventdata, handles)
     
     for k=1:1:n
     set(handles.Comando_Control_Voz,'string','Presione ENTER para grabar');
-    b=input('Presione ENTER para grabar');
+%   b=input('Presione ENTER para grabar');
     disp('Hable!!!!');
     set(handles.Comando_Control_Voz,'string','Hable');
     recordblocking(recObj,3);
@@ -238,6 +238,20 @@ function Comando_Control_Voz_Callback(hObject, eventdata, handles)
     y = getaudiodata(recObj);
     MF=mfcc(y,8000);
     RtaVoz=sim(RedVoz,MF(:))
+    for i = 1:length(RtaVoz)
+        if RtaVoz(i) >= 0.75 && RtaVoz(i) <= 1
+            switch i
+                case 1
+                    set(handles.Comando_Control_Voz,'string','Comando 1');
+                case 2
+                    set(handles.Comando_Control_Voz,'string','Comando 2');
+                case 3
+                    set(handles.Comando_Control_Voz,'string','Comando 3');
+                case 4
+                    set(handles.Comando_Control_Voz,'string','Comando 4');
+            end
+        end
+    end
     pause(3);
     set(handles.Comando_Control_Voz,'string','Comando');
     end

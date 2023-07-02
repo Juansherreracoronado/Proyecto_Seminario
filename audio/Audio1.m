@@ -1,3 +1,4 @@
+clear; clc;
 
 recObj = audiorecorder(8000,16,1,1);
 disp('Inicializando Micro');
