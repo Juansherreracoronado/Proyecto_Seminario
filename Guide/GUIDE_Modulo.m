@@ -59,8 +59,8 @@ handles.servo=servo(handles.a,'D9'); %Servo 1
 handles.servo2=servo(handles.a,'D8'); %Servo 2
 writePosition(handles.servo,0);
 writePosition(handles.servo2,0);
-set(handles.movimiento_S1,'Min',0,'Max',1,'value',0,'SliderStep',[0.05 0.05]);  
-set(handles.movimiento_S2,'Min',0,'Max',1,'value',0,'SliderStep',[0.05 0.05]);
+set(handles.movimiento_S1,'Min',0,'Max',1,'value',0,'SliderStep',[0.1 0.1]);  
+set(handles.movimiento_S2,'Min',0,'Max',1,'value',0,'SliderStep',[0.1 0.1]);
 handles.output=hObject;
 guidata(hObject, handles);
 
@@ -196,16 +196,28 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
     a=bwareaopen(a,10000);
     Respuesta=sim(Red_Gestos,a(:))
     for i = 1:length(Respuesta)
-        if Respuesta(i) >= 0.75 && Respuesta(i) <= 1
+        if Respuesta(i) >= 0.85 && Respuesta(i) <= 1
             switch i
                 case 1
                     disp('gesto 1')
+                     if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0 
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
+                     end
                 case 2
                     disp('gesto 2')
+                    if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1 
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
+                     end
                 case 3
                     disp('gesto 3')
+                    if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
+                     end
                 case 4
                     disp('gesto 4')
+                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1 
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
+                     end
             end
         end
     end
