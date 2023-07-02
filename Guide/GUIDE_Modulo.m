@@ -9,7 +9,7 @@ function varargout = GUIDE_Modulo(varargin)
 %    GUIDE_MODULO('CALLBACK',hObject,eventData,handles,...) calls the local
 %      function named CALLBACK in GUIDE_MODULO.M with the given input arguments.
 %
-%      GUIDE_MODULO('Property','Value',...) creates a new GUIDE_MODULO or raises the
+%      GUIDE_MODULO('Property','Value',...) creates a new GUIDE_MODULO or raises th
 %      existing singleton*.  Starting from the left, property value pairs are
 %      applied to the GUI before GUIDE_Modulo_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
