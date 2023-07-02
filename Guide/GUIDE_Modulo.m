@@ -200,21 +200,25 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
             switch i
                 case 1
                     disp('gesto 1')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 1');
                      if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0 
                         writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
                      end
                 case 2
                     disp('gesto 2')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 2');
                     if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1 
                         writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
                      end
                 case 3
                     disp('gesto 3')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 3');
                     if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
                         writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
                      end
                 case 4
                     disp('gesto 4')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 4');
                     if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1 
                         writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
                      end
@@ -225,6 +229,7 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
     imshow(a);
     end
     clear cam
+    set(handles.Boton_Control_Imagen,'string','Comando');
 
 
 % --- Executes on button press in Comando_Control_Voz.
