@@ -203,28 +203,31 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
                     set(handles.Boton_Control_Imagen,'string','Gesto 1');
                      if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0 
                         writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
+                        pause(5);
                      end
                 case 2
                     disp('gesto 2')
                     set(handles.Boton_Control_Imagen,'string','Gesto 2');
                     if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1 
                         writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
+                        pause(5);
                      end
                 case 3
                     disp('gesto 3')
                     set(handles.Boton_Control_Imagen,'string','Gesto 3');
                     if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
                         writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
+                        pause(5);
                      end
                 case 4
                     disp('gesto 4')
                     set(handles.Boton_Control_Imagen,'string','Gesto 4');
                     if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1 
                         writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
+                        pause(5);
                      end
             end
         end
-    end
     c=c+1;
     imshow(a);
     end
@@ -308,5 +311,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: delete(hObject) closes the figure
+writePosition(handles.servo,0);
+writePosition(handles.servo2,0);
 clear handles.a % Cierra y termina la conexión con arduino
 delete(hObject);
