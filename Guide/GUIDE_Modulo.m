@@ -202,28 +202,28 @@ while c<50
                     disp('gesto 1')
                     set(handles.Boton_Control_Imagen,'string','Gesto 1');
                     position1 = readPosition(handles.servo)
-                    if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0
+                    if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) >= 0
                         writePosition(handles.servo,(readPosition(handles.servo))+0.1)
                     end
                 case 2
                     disp('gesto 2')
                     position1 = readPosition(handles.servo)
                     set(handles.Boton_Control_Imagen,'string','Gesto 2');
-                    if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1
-                        writePosition(handles.servo,(readPosition(handles.servo))+0.1)
+                    if readPosition(handles.servo) >= 0.1 && readPosition(handles.servo) <= 1
+                        writePosition(handles.servo,(readPosition(handles.servo))-0.1)
                     end
                 case 3
                     disp('gesto 3')
-                    position2 = readPosition(handles.servo)
+                    position2 = readPosition(handles.servo2)
                     set(handles.Boton_Control_Imagen,'string','Gesto 3');
-                    if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
-                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)
+                    if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) >= 0
+                        writePosition(handles.servo2,(readPosition(handles.servo2))+0.1)
                     end
                 case 4
                     disp('gesto 4')
-                    position2 = readPosition(handles.servo)
+                    position2 = readPosition(handles.servo2)
                     set(handles.Boton_Control_Imagen,'string','Gesto 4');
-                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1
+                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) <= 1
                         writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)
                     end
             end
@@ -265,7 +265,9 @@ function Comando_Control_Voz_Callback(hObject, eventdata, handles)
                 case 1
                     set(handles.Comando_Control_Voz,'string','Comando 1');
                 case 2
-                    set(handles.Comando_Control_Voz,'string','Comando 2');
+                    set(handles.Comando_Control_Voz,'string','Comando 2');   
+                    writePosition(handles.servo1,0.1576); 
+                    writePosition(handles.servo2,0.5399); 
                 case 3
                     set(handles.Comando_Control_Voz,'string','Comando 3');
                 case 4
