@@ -186,11 +186,11 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
 % hObject    handle to Boton_Control_Imagen (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    load Red1.mat
-    cam=webcam();
-    cam.Resolution='640x480';
-    c=0;
-    while c<100
+load Red1.mat
+cam=webcam();
+cam.Resolution='640x480';
+c=0;
+while c<50
     img=snapshot(cam);
     [a,b]=maskprueba(img);
     a=bwareaopen(a,10000);
@@ -201,33 +201,34 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
                 case 1
                     disp('gesto 1')
                     set(handles.Boton_Control_Imagen,'string','Gesto 1');
-                     if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0 
-                        writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
-                        pause(5);
-                     end
+                    position1 = readPosition(handles.servo)
+                    if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1)
+                    end
                 case 2
                     disp('gesto 2')
+                    position1 = readPosition(handles.servo)
                     set(handles.Boton_Control_Imagen,'string','Gesto 2');
-                    if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1 
-                        writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
-                        pause(5);
-                     end
+                    if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1)
+                    end
                 case 3
                     disp('gesto 3')
+                    position2 = readPosition(handles.servo)
                     set(handles.Boton_Control_Imagen,'string','Gesto 3');
                     if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
-                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
-                        pause(5);
-                     end
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)
+                    end
                 case 4
                     disp('gesto 4')
+                    position2 = readPosition(handles.servo)
                     set(handles.Boton_Control_Imagen,'string','Gesto 4');
-                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1 
-                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1); 
-                        pause(5);
-                     end
+                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)
+                    end
             end
         end
+    end
     c=c+1;
     imshow(a);
     end

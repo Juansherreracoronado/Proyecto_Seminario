@@ -190,7 +190,7 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
     cam=webcam();
     cam.Resolution='640x480';
     c=0;
-    while c<100
+    while c<50
     img=snapshot(cam);
     [a,b]=maskprueba(img);
     a=bwareaopen(a,10000);
@@ -200,25 +200,36 @@ function Boton_Control_Imagen_Callback(hObject, eventdata, handles)
             switch i
                 case 1
                     disp('gesto 1')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 1');
                      if readPosition(handles.servo) <= 0.9 && readPosition(handles.servo) > 0 
-                        writePosition(handles.servo,(readPosition(handles.servo))+0.1); 
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1)
                      end
                 case 2
                     disp('gesto 2')
-                    if readPosition(handles.servo2) >= 0.9 && readPosition(handles.servo2) > 0 
-                        writePosition(handles.servo2,(readPosition(handles.servo2))+0.1); 
-                     end
+                    set(handles.Boton_Control_Imagen,'string','Gesto 2');
+                    if readPosition(handles.servo) >= 0 && readPosition(handles.servo) < 1 
+                        writePosition(handles.servo,(readPosition(handles.servo))+0.1)
+                    end
                 case 3
                     disp('gesto 3')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 3');
+                    if readPosition(handles.servo2) <= 0.9 && readPosition(handles.servo2) < 0
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)                         
+                    end
                 case 4
                     disp('gesto 4')
+                    set(handles.Boton_Control_Imagen,'string','Gesto 4');
+                    if readPosition(handles.servo2) >= 0.1 && readPosition(handles.servo2) < 1 
+                        writePosition(handles.servo2,(readPosition(handles.servo2))-0.1)                         
+                    end
             end
         end
-    end
+    end    
     c=c+1;
     imshow(a);
     end
     clear cam
+    set(handles.Boton_Control_Imagen,'string','Comando');
 
 
 % --- Executes on button press in Comando_Control_Voz.
@@ -297,5 +308,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: delete(hObject) closes the figure
+writePosition(handles.servo,0);
+writePosition(handles.servo2,0);
 clear handles.a % Cierra y termina la conexión con arduino
 delete(hObject);
