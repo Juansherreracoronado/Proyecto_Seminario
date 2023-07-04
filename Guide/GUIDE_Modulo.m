@@ -264,14 +264,20 @@ function Comando_Control_Voz_Callback(hObject, eventdata, handles)
             switch i
                 case 1
                     set(handles.Comando_Control_Voz,'string','Comando 1');
+                     writePosition(handles.servo,0.1576); 
+                    writePosition(handles.servo2,0.5399); 
                 case 2
                     set(handles.Comando_Control_Voz,'string','Comando 2');   
-                    writePosition(handles.servo1,0.1576); 
-                    writePosition(handles.servo2,0.5399); 
+                    writePosition(handles.servo,0.4625); 
+                    writePosition(handles.servo2,0.4036); 
                 case 3
                     set(handles.Comando_Control_Voz,'string','Comando 3');
+                     writePosition(handles.servo,0.3227); 
+                    writePosition(handles.servo2,0.6396); 
                 case 4
                     set(handles.Comando_Control_Voz,'string','Comando 4');
+                    writePosition(handles.servo,0.3174); 
+                    writePosition(handles.servo2,0.5397); 
             end
         end
     end
