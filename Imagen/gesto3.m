@@ -3,7 +3,7 @@ cam=webcam();
 cam.Resolution='640x480';
 c=0;
 GESTO_3=zeros(640*480,100);
-CAT_3=zeros(4,100);
+CAT_3=zeros(5,100);
 while c<100
 img=snapshot(cam);
 [a,b]=maskprueba(img);
