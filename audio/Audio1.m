@@ -1,15 +1,13 @@
-clear; clc;
-
-recObj = audiorecorder(8000,16,1,1);
+clear;clc;
+recObj = audiorecorder(8000,16,1,0);
 disp('Inicializando Micro');
 recordblocking(recObj,2);
 % Mas muestras en n
-n=20;
+n=15;
 MFs4=zeros(298*14,n);
 Cat4=zeros(4,n);
 
 for k=1:1:n
-disp(k);
 a=input('Presione ENTER para grabar');
 disp('Hable!!!!');
 recordblocking(recObj,3);
