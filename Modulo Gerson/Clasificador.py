@@ -9,7 +9,7 @@ grosor = 2
 escala = 1
 posicion_texto = [(400, 400), (400, 350), (400, 400)]
 pos = 0
-umbral = 100
+umbral = 50
 area_min1 = 100
 area_min2 = 300
 area_min3 = 400
@@ -31,29 +31,14 @@ for filename in os.listdir('Dataset/tst'):
         print('No hay vehiculos detectados')
     elif len(vehiculos) >= 1:
         for (x, y, w, h) in vehiculos:
-            cv2.rectangle(img_byn, (x, y), (x+w, y+h), color, grosor)
+            cv2.rectangle(img, (x, y), (x+w, y+h), color, grosor)
 
     contours, _ = cv2.findContours(
-        img_byn, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(img_byn, contours, -1, color, grosor)
-
-    camiones = camionetas = carros = 0
-
-    for contorno in contours:
-        # Obtener valor absoluto de la función de area de contorno
-        area = abs(cv2.contourArea(contorno, True))
-        print(area)
-        if area >= area_min3:
-            camiones += 1
-        elif area >= area_min2:
-            camionetas += 1
-        elif area >= area_min1:
-            carros += 1
-
-    cv2.putText(img_byn, 'Vehiculos: ' + str(len(vehiculos)),
-                posicion_texto[pos], fuente, escala, color, grosor)
+        img_byn, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    cv2.putText(img, 'Vehiculos: ' + str(len(vehiculos)),
+                posicion_texto[pos], fuente, escala, (255, 0, 255), grosor)
     pos = pos+1
 
-    cv2.imshow(filename, img_byn)
+    cv2.imshow(filename, img)
     cv2.waitKey(0)
     cv2.destroyAllWindows
